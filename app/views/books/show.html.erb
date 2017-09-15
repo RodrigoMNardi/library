@@ -20,5 +20,9 @@
   <%= @book.image %>
 </p>
 
+<p>
+  <img src="<%= @book.image %>" style="width:228px;height:304px;">
+</p>
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

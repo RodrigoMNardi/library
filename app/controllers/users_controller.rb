@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def logout
+    session.delete(:user)
+    redirect_to controller: 'books', action: 'index'
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -20,6 +25,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     if User.where(name: user_params[:name], password: user_params[:password]).first
+      session[:user] = user_params[:name]
       redirect_to controller: 'books', action: 'index'
     else
       redirect_to controller: 'users', action: 'login'

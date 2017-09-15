@@ -9,7 +9,11 @@
 <body>
 
 <ul>
-  <li><%= link_to 'Login', controller: 'users', action: 'login'%></li>
+  <%if logged_user?%>
+      <li><%= link_to 'Logout', controller: 'users', action: 'logout'%></li>
+  <%else%>
+      <li><%= link_to 'Login', controller: 'users', action: 'login'%></li>
+  <%end%>
 </ul>
 
 <%= yield %>

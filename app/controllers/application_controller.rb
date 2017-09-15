@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :is_admin?
 
   def is_admin?
-    puts "params #{params.inspect}"
-    puts "permitted_pages? #{permitted_pages?}"
     if !logged_user? and !permitted_pages?
       redirect_to controller: 'books', action: 'index'
     end
