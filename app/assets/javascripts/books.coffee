@@ -29,11 +29,11 @@
     return
 
 @toggle = (id) ->
-  $("#"+id).toggle()
+  div = $("#"+id)
+  if div.hasClass("hidden")
+    div.removeClass("hidden").addClass("show")
+  else
+    div.removeClass("show").addClass("hidden")
 
 @toggle_all = () ->
-  $('.description').toggle()
-
-$ ->
-  toggle_all()
-  
+  $('.description').hide()

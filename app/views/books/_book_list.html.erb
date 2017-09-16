@@ -1,3 +1,4 @@
+<%= fa_icon "sort-alpha-#{@order}", text: t(:order), onclick: "sortby('#{@order}')", style: 'width:20px'%>
 <% @books.each do |book| %>
     <div class="row">
       <div class="cell">
@@ -19,9 +20,9 @@
       </span>
     </div>
     
-    <span id="toggle_<%= book.id%>" class="description">
-        <%= book.description %>
-      </span>
+    <span id="toggle_<%= book.id%>" class="hidden">
+      <span class="description"><%= book.description %></span>
+    </span>
     <hr width="50%" color="#000000" size="2">
 <%end%>
 
