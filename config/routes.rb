@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get  '/login'          => 'users#login'
   get  '/logout'         => 'users#logout'
   get  '/books/filtered' => 'books#filtered'
+  get  '/books/sortby'   => 'books#sortby'
 
   resources :books
   resources :users

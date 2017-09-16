@@ -6,7 +6,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.all.order('title asc')
+    @order = 'asc'
   end
 
   # GET /books/1
@@ -86,11 +87,19 @@ class BooksController < ApplicationController
       @books = Book.all
     end
 
-    puts 'respond_to'
-    # puts render partial: 'books/book_list'
     respond_to do |format|
       format.html{render partial: 'books/book_list', locals: {books: @books}, layout: false}
       format.js  {render partial: 'books/book_list', locals: {books: @books}, layout: false}
+    end
+  end
+
+  def sortby
+    @order = (params[:order] == 'asc')? 'desc' : 'asc'
+    @books = Book.all.order("#{params[:sort]} #{@order}")
+    
+    respond_to do |format|
+      format.html{render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
+      format.js  {render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
     end
   end
 

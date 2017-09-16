@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
       when 'users'
         %w[create login].include? params[:action]
       when 'books'
-        %w[index filtered].include? params[:action]
+        %w[index filtered sortby].include? params[:action]
       else
         false
     end

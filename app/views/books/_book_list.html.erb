@@ -2,9 +2,10 @@
   <thead>
   <tr>
     <th></th>
-    <th>Author</th>
-    <th>Title</th>
-    <th>Description</th>
+    <th><%= fa_icon "sort-alpha-#{@order}", text: t(:order),
+                    onclick: "sortby('title', '#{@order}')",
+                    style: 'width:20px'%></th>
+
     <th colspan="2"></th>
   </tr>
   </thead>
@@ -13,9 +14,17 @@
   <% @books.each do |book| %>
       <tr>
         <td><img src="<%= book.image %>" style="width:228px;height:304px;"></td>
-        <td><%= book.author %></td>
-        <td><%= book.title %></td>
-        <td><%= book.description %></td>
+        <td>
+          <h3><%= book.title %></h3>
+          <h4><%= book.author %></h4>
+          <span onclick="toggle('toggle_<%= book.id%>')">
+            <%= fa_icon 'info', text: t(:more), style: 'width:10px'%>
+          </span>
+                                 
+          <span id="toggle_<%= book.id%>" class="description">
+            <%= book.description %>
+          </span>
+        </td>
         <%if logged_user?%>
             <td><%= link_to 'Edit', edit_book_path(book) %></td>
             <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>

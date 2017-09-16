@@ -17,7 +17,22 @@
     filter = ''
 
   $.get '/books/filtered', {filter: filter}, (data) ->
-    console.log data
     $('#list').html data
+    toggle_all()
     return
+
+@sortby = (entry, order) ->
+  $.get '/books/sortby', {sort: entry, order: order}, (data) ->
+    $('#list').html data
+    toggle_all()
+    return
+
+@toggle = (id) ->
+  $("#"+id).toggle()
+
+@toggle_all = () ->
+  $('.description').toggle()
+
+$ ->
+  toggle_all()
   
