@@ -76,6 +76,7 @@ class BooksController < ApplicationController
     end
   end
 
+  # Retorna a lista ordenada asc/desc, além de considerar a filtragem aplicada anteriormente se for o caso
   def sortby
     @books = []
     @order = (params[:order] == 'asc')? 'desc' : 'asc'
@@ -89,6 +90,7 @@ class BooksController < ApplicationController
 
   private
 
+  # Filtragem com a ordenação. Assim pode ser usado nas tuas funções principais do sistema
   def filter_by
     order = "#{params[:sort]} #{@order}"
 

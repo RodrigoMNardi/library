@@ -1,28 +1,29 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+µLibrary permite o catalogo de diversos livros, considerando o autor, titulo e descrição.
 
-Things you may want to cover:
+Versão de Ruby: 2.2.4 (Windows) e Rails 4.2.6 (Windows)
 
-* Ruby version
+Não tem dependências externas, somente é preciso ter instalado o ruby e bundler.
 
-* System dependencies
+Executar os seguintes comandos antes inicializar o sistema pela primeira vez.
+<tt>bundle install</tt>
+<tt>rake db:migrate</tt>
 
-* Configuration
+O sistema não permite o cadastro de usuários e nem administradores é necessário modificar manualmente o banco de
+dados.
 
-* Database creation
+== Estrutura de dados
 
-* Database initialization
+Modelo User
+    * Admin (Bool)      - Caso o sistema tenha níveis de usuários essa variável pode ser usada para diferenciar os admin
+    * name  (String)    - Nome do usuário
+    * password (String) - Senha do usuário, atualmente está em texto plano precisa ser modificado para MD5
 
-* How to run the test suite
+Modelo Book
+    * Author (String)    - Nome do autor do livro
+    * Title  (String)    - Titulo
+    * Description (Text) - Descrição, devido que esse campo possa ser muito grande usamos um tamanho maior que string
+    * Image (Text)       - Imagem é uma URL para capa que se encontra na internet
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Os modelos nessa versão não possuem nenhum relacionamento, mas no futuro poderá ter essa relação.
