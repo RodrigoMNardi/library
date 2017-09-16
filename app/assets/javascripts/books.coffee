@@ -10,3 +10,14 @@
     $('.image_preview').html('')
 
   return
+
+@books_filter = () ->
+  filter = $('#filter').val()
+  if filter.length < 3
+    filter = ''
+
+  $.get '/books/filtered', {filter: filter}, (data) ->
+    console.log data
+    $('#list').html data
+    return
+  

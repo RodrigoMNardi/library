@@ -63,6 +63,37 @@ class BooksController < ApplicationController
     end
   end
 
+  # Retonar a lista de Livros filtrada e processada pronta para ser exibida
+  def filtered
+    @books = []
+    if params.has_key? :filter and !params[:filter].empty?
+      author_filter = Book.where("author like '%#{params[:filter]}%'")
+      title_filter  = Book.where("title like '%#{params[:filter]}%'")
+      description_filter = Book.where("description like '%#{params[:filter]}%'")
+
+      author_filter.each do |author|
+        @books << author
+      end
+
+      title_filter.each do |title|
+        @books << title unless @books.include? title
+      end
+
+      description_filter.each do |description|
+        @books << description unless @books.include? description
+      end
+    else
+      @books = Book.all
+    end
+
+    puts 'respond_to'
+    # puts render partial: 'books/book_list'
+    respond_to do |format|
+      format.html{render partial: 'books/book_list', locals: {books: @books}, layout: false}
+      format.js  {render partial: 'books/book_list', locals: {books: @books}, layout: false}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book

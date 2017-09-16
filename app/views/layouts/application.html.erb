@@ -9,6 +9,7 @@
 <body>
 
 <ul>
+  <li><%= link_to t(:home), controller: 'books', action: 'index'%></li>
   <%if logged_user?%>
       <li><%= link_to 'Logout', controller: 'users', action: 'logout'%></li>
   <%else%>

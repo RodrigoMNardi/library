@@ -12,11 +12,12 @@ class ApplicationController < ActionController::Base
   end
 
   def permitted_pages?
+    puts params.inspect
     case params[:controller]
       when 'users'
         %w[create login].include? params[:action]
       when 'books'
-        %w[index].include? params[:action]
+        %w[index filtered].include? params[:action]
       else
         false
     end
