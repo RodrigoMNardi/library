@@ -47,3 +47,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Font Awesome gem - http://fontawesome.io/icons/
 gem 'font-awesome-rails'
+gem 'bootstrap-sass'

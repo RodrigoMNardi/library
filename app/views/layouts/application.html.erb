@@ -5,19 +5,27 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<ul>
-  <li><%= link_to t(:home), controller: 'books', action: 'index'%></li>
-  <%if logged_user?%>
-      <li><%= link_to 'Logout', controller: 'users', action: 'logout'%></li>
-  <%else%>
-      <li><%= link_to 'Login', controller: 'users', action: 'login'%></li>
-  <%end%>
-</ul>
+<header>
+  <h1>&#181;Library</h1>
+  <ul>
+    <li><%= link_to t(:home), controller: 'books', action: 'index'%></li>
+    <%if logged_user?%>
+        <li><%= link_to 'Logout', controller: 'users', action: 'logout'%></li>
+    <%else%>
+        <li><%= link_to 'Login', controller: 'users', action: 'login'%></li>
+    <%end%>
+  </ul>
+</header>
 
-<%= yield %>
+<hr width="75%" color="#000000" size="2">
+
+<main>
+  <%= yield %>
+</main>
 
 </body>
 </html>
