@@ -1,0 +1,16 @@
+pt-br:
+  home        : Início
+  books_list  : Catalogo de Livros
+  new_book    : Adicionar livro
+  order       : Ordenar por título
+  more        : Mais
+  edit        : Editar
+  delete      : Deletar
+  show        : Mostrar
+  back        : Voltar
+  author      : Autor
+  title       : Título
+  description : Descrição
+  image       : Capa
+  image_help  : URL para a capa
+  submit      : Salvar

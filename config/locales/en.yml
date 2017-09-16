@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  home        : Home
+  books_list  : Book Catalog
+  new_book    : Add book
+  order       : Order by title
+  more        : More
+  edit        : Edit
+  delete      : Delete
+  show        : Show
+  back        : Back
+  author      : Author
+  title       : Book title
+  description : Description
+  image       : Book Cover
+  image_help  : URL image
+  submit      : Save
+
+
