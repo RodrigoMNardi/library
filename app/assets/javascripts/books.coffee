@@ -16,13 +16,14 @@
   if filter.length < 3
     filter = ''
 
-  $.get '/books/filtered', {filter: filter}, (data) ->
+  $.get '/books/filtered', {sort: 'title', filter: filter}, (data) ->
     $('#list').html data
     toggle_all()
     return
 
-@sortby = (entry, order) ->
-  $.get '/books/sortby', {sort: entry, order: order}, (data) ->
+@sortby = (order) ->
+  filter = $('#filter').val()
+  $.get '/books/sortby', {sort: 'title', order: order, filter: filter}, (data) ->
     $('#list').html data
     toggle_all()
     return

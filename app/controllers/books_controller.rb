@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   include ApplicationHelper
-  
+
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books
@@ -67,10 +67,35 @@ class BooksController < ApplicationController
   # Retonar a lista de Livros filtrada e processada pronta para ser exibida
   def filtered
     @books = []
+    @order = 'asc'
+    filter_by
+
+    respond_to do |format|
+      format.html{render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
+      format.js  {render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
+    end
+  end
+
+  def sortby
+    @books = []
+    @order = (params[:order] == 'asc')? 'desc' : 'asc'
+    filter_by
+    
+    respond_to do |format|
+      format.html{render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
+      format.js  {render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
+    end
+  end
+
+  private
+
+  def filter_by
+    order = "#{params[:sort]} #{@order}"
+
     if params.has_key? :filter and !params[:filter].empty?
-      author_filter = Book.where("author like '%#{params[:filter]}%'")
-      title_filter  = Book.where("title like '%#{params[:filter]}%'")
-      description_filter = Book.where("description like '%#{params[:filter]}%'")
+      author_filter      = Book.where("author like '%#{params[:filter]}%'").order(order)
+      title_filter       = Book.where("title like '%#{params[:filter]}%'").order(order)
+      description_filter = Book.where("description like '%#{params[:filter]}%'").order(order)
 
       author_filter.each do |author|
         @books << author
@@ -84,33 +109,18 @@ class BooksController < ApplicationController
         @books << description unless @books.include? description
       end
     else
-      @books = Book.all
-    end
-
-    respond_to do |format|
-      format.html{render partial: 'books/book_list', locals: {books: @books}, layout: false}
-      format.js  {render partial: 'books/book_list', locals: {books: @books}, layout: false}
+      puts Book.all.order(order).inspect
+      @books = Book.all.order(order)
     end
   end
 
-  def sortby
-    @order = (params[:order] == 'asc')? 'desc' : 'asc'
-    @books = Book.all.order("#{params[:sort]} #{@order}")
-    
-    respond_to do |format|
-      format.html{render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
-      format.js  {render partial: 'books/book_list', locals: {books: @books, order: @order}, layout: false}
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:author, :title, :description, :image)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:author, :title, :description, :image)
+  end
 end
