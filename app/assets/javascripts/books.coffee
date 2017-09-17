@@ -35,5 +35,3 @@
   else
     div.removeClass("show").addClass("hidden")
 
-@toggle_all = () ->
-  $('.description').hide()
