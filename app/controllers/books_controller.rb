@@ -91,6 +91,8 @@ class BooksController < ApplicationController
   private
 
   # Filtragem com a ordenação. Assim pode ser usado nas tuas funções principais do sistema
+  # Utiliza uma lista auxiliar para não repetir os livros quando o autor/titulo/description
+  # deem match nas palavras filtradas.
   def filter_by
     order = "#{params[:sort]} #{@order}"
 

@@ -26,4 +26,4 @@ Modelo Book
     * Description (Text) - Descrição, devido que esse campo possa ser muito grande usamos um tamanho maior que string
     * Image (Text)       - Imagem é uma URL para capa que se encontra na internet
 
-Os modelos nessa versão não possuem nenhum relacionamento, mas no futuro poderá ter essa relação.
+Os modelos nessa versão não possuem nenhum relacionamento, mas no futuro poderá ser criado.
