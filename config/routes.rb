@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
 
   root 'books#index'
+  get  '*a', to: redirect('/books')
 end
