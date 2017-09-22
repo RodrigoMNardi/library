@@ -1,3 +1,5 @@
+require 'digest'
+
 class UsersController < ApplicationController
   include ApplicationHelper
 
@@ -24,7 +26,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    if User.where(name: user_params[:name], password: user_params[:password]).first
+    if User.where(name: user_params[:name], password: Digest::SHA256.hexdigest(user_params[:password])).first
       session[:user] = user_params[:name]
       redirect_to controller: 'books', action: 'index'
     else
